@@ -1,0 +1,13 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: 1em 1.5em;
+    background-color: #f7f7f7;
+    /* color: #BEBEBE;  */
+    /* position: fixed; */
+    max-height: 70px;
+    height: 100%;
+    width: 100%;
+    bottom: 0px;
+    border-top: solid 2px #1C2840;
+}

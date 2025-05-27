@@ -1,0 +1,27 @@
+.message {
+    max-width: 400px;
+    /* width: 100%; */
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 1em;  
+    text-align: center; 
+    align-items: center;
+    /* margin: 1.2em auto; */
+    position: absolute;
+    z-index: 5;
+    right:40%;
+    left: 40%;
+    top: 15px;
+}
+
+.sucesso {
+    color: #155724;
+    background-color: #D4EDDA;
+    border-color: #C3E6CB;
+}
+
+.erro {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

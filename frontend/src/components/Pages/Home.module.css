@@ -1,0 +1,21 @@
+.tabela {
+    /* background-color: transparent !important; */
+    /* margin-top: 20px; */
+}
+
+/* .div_home{
+    margin-top: 40px;
+    display: flex;
+} */
+
+h2 {
+    margin: 20px;
+}
+
+.div_home{
+
+}
+
+.botao_excluir{
+    background-color: red;
+}

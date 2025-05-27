@@ -1,0 +1,124 @@
+.navbar {
+    padding: 0px 2em;
+    /* margin-bottom: 1em; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: #f7f7f7; */
+    height: 100px;
+
+    /* background: rgb(16,21,30);
+    background: linear-gradient(0deg, rgba(16,21,30,1) 0%, rgba(41,58,92,1) 87%);  */
+
+    background-color: #2477BF;
+}
+
+.lista_opcoes {
+    display: flex;  
+    list-style: none;
+    margin: 0;
+}
+
+.botao_link {
+    margin-left: 1em;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-weight: 550;
+    color: #e9ecef;;
+}
+
+.botao_hover:hover{
+    color: #969696;
+    cursor: pointer;
+}
+
+.item_lista {
+    display: flex;
+  align-items: center;
+}
+
+.navbar a{
+    text-decoration: none;
+    /* color: #1C2840; */
+    color: #e9ecef;
+}
+
+.navbar h1 a{
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.navbar_logo_img {
+    width: 70px;
+    height: 70px;
+    margin-right: 1em;
+}
+
+.navbar_logo{
+    display: flex;
+    align-items: center;
+}
+
+#nav_botoes{
+    display: flex;
+}
+
+.div_dropdown_usuario{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.div_dropdown_usuario:hover {
+    background-color: #1c598e;
+}
+
+.div_dropdown_usuario:active {
+    background-color: #133c5f;
+}
+
+.icon_drop_img_usuario{
+    margin-left: 5px;
+    color: #969696;
+    font-size: small;
+}
+
+.itens_dropdown{
+    padding: 0px;
+}
+
+.item_dropdown {
+    margin-right: 8px;
+}
+
+.a_dropdown{
+  padding: 6px 16px;
+  width: 100%;
+  display: block;
+  color: black !important;
+}
+
+.a_dropdown:hover {
+    background-color: #f6f6f6;
+    border-radius: 0.375em;
+}
+
+.a_dropdown:active {
+    background-color: #ececec;
+    border-radius: 0.375em;
+}
+
+.logout{
+    color: #d93e3eed  !important;
+}
+
+.icon_plus{
+    margin-right: 3px;
+    color: #e9ecef;
+}
+
+.botao_add_review{
+    margin-right: 10px;
+}

@@ -1,0 +1,33 @@
+.container_login {
+    /* max-width: 400px; */
+    width: 100%;
+    /* margin: auto; */
+    display: flex;
+    padding-top: 30px;
+    justify-content: center;
+}
+
+.div_titulo{
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    text-align: start;
+    max-width: 500px;
+}
+
+.div_titulo span {
+    font-weight: bold;
+}
+
+.form_login{
+    max-width: 300px;
+    width: 100%;
+}
+
+.div_form_login{
+    max-width: 300px;
+    width: 100%;
+    display: inline-grid;
+    height: 100%;
+    align-items: center;
+}

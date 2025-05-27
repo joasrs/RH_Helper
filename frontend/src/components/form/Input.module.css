@@ -1,0 +1,59 @@
+.botao {
+    background-color: #1C2840;
+    color: #f7f7f7 !important;
+}
+
+.botao:focus {
+    background-color: #1c2840e9;
+}
+
+.botao:hover {
+    background-color: #1c2840e9;
+}
+
+.form_control, .form_control_senha{
+    margin-bottom: 5px;
+}
+
+.form_control_senha{
+    width: 100%;
+}
+
+.text_area{
+    resize: none;
+    height: 250px !important;
+}
+
+.icone_botao{
+    color: #f7f7f7;
+}
+
+.input_gradiente {
+    background-color: #2477BF;
+}
+
+.descricao_botao{
+    margin-right: 10px;
+    color: #f7f7f7;
+}
+
+.spinner{
+    color: #f7f7f7;
+}
+
+.btn_mostrar_senha{
+    width: 50px;
+    background-color: #f0f0f0;
+    border: solid 1px #dee2e6;
+    border-radius: 0px 7px 7px 0px;
+    border-left: none;
+    height: 58px;
+}
+
+.div_senha{
+    display: flex;
+}
+
+.input_senha{
+    border-radius: 5px 0px 0px 5px;
+}
