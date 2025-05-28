@@ -1,0 +1,38 @@
+.corpo_card{
+    display: flex;
+    justify-content: space-between;
+}
+
+.campo{
+
+}
+
+.titulo {
+display: block;
+}
+
+.conteudo {
+
+}
+
+.card {
+    background-color: #f7f7f7;
+}
+
+.card:hover {
+    cursor: pointer;
+    background-color: #efefef;
+}
+
+.card:active {
+    background-color: #e6e6e6;
+}
+
+.card_header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal{
+    z-index: 999;
+}

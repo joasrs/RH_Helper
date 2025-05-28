@@ -1,0 +1,10 @@
+.menu_lateral{
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #d7d7d7;
+    padding: 0px;
+}
+
+.lista {
+    padding: 0px;
+}

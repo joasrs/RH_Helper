@@ -8,7 +8,7 @@ export default function useErroPadrao() {
     (erro) => {
       const mensagem = erro.status ? erro.response.data.message : erro.message;
       console.log(erro);
-      setFlashMessage(mensagem, "erro");
+      setFlashMessage(mensagem, "error");
       return mensagem;
     },
     [setFlashMessage]

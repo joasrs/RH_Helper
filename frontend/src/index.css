@@ -14,11 +14,11 @@
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   box-sizing: border-box;
-  color: #1C2840;
+  /* color: #1C2840; */
 }
 
 body {
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
 }
 
 /* a {

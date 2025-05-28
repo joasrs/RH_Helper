@@ -1,6 +1,9 @@
 .tabela {
     /* background-color: transparent !important; */
     /* margin-top: 20px; */
+    margin: auto;
+    border-right: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
 }
 
 /* .div_home{
@@ -13,7 +16,8 @@ h2 {
 }
 
 .div_home{
-
+ width: 100%;
+ padding: 20px;
 }
 
 .botao_excluir{

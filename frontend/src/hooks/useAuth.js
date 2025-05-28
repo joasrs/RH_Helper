@@ -27,7 +27,7 @@ export default function useAuth() {
             logout(true);
             setFlashMessage(
               `Faça o login novamente para continuar utilizando nossos serviços`,
-              "erro"
+              "error"
             );
             navigate("/login");
           }
@@ -53,7 +53,10 @@ export default function useAuth() {
       setarHeaderAPiToken(response.data.usuario.token);
       setarUsuarioContexto(response.data.usuario);
 
-      setFlashMessage(`Bem vindo(a) ${response.data.usuario.nome}!`, "sucesso");
+      setFlashMessage(
+        `Bem vindo(a) de volta ${response.data.usuario.nome}!`,
+        "success"
+      );
       autenticarUsuario(response.data.usuario);
     });
   }, []);
@@ -64,7 +67,7 @@ export default function useAuth() {
     api.defaults.headers.Authorization = undefined;
 
     if (!ocultarMensagem)
-      setFlashMessage(`Até logo ${usuario.nome}!`, "sucesso");
+      setFlashMessage(`Até logo ${usuario.nome}!`, "success");
 
     navigate("/login");
   }

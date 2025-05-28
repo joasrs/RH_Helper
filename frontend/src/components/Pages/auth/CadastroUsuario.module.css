@@ -9,9 +9,9 @@
 .div_titulo{
     display: flex;
     align-items: center;
-    margin-right: 30px;
     text-align: start;
     max-width: 500px;
+    margin: auto;
 }
 
 .div_titulo span {

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import styles from './Mensagem.module.css'
 import bus from '../../utils/bus';
+import { Alert } from '@mui/material';
 
 export default function Mensagem(){
     const [visivel, setVisivel] = useState(false);
-    const [tipo, setTipo ] = useState('sucesso');
+    const [tipo, setTipo ] = useState('success');
     const [mensagem, setMensagem] = useState('');
 
     useEffect(() => {
@@ -25,7 +26,11 @@ export default function Mensagem(){
         } );
     }, []);
 
+{/* <div class="alert alert-success" role="alert">
+  A simple success alert—check it out!
+  <div className={`alert ${styles.message} ${styles[tipo]}`} role="alert">{mensagem}</div>
+</div> */}
     return (    
-        visivel && ( <div className={`${styles.message} ${styles[tipo]}`}>{mensagem}</div>)
+        visivel && ( <Alert variant="filled" className={styles.message} severity={tipo}>{mensagem}</Alert>)
     )
 }

@@ -1,0 +1,39 @@
+.link{
+    display: block;
+    width: 100%;
+    text-align: start;
+    padding: 10px;
+    /* justify-content: space-between; */
+}
+
+.link:hover {
+    background-color: #ededed;
+}
+
+.item_lista{
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover{
+    text-decoration: none;
+    color: inherit;
+}
+
+.item_header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub_itens {
+    display: grid;
+}
+
+.link_sub_item{
+    padding: 10px 20px;
+  font-size: smaller;
+}
