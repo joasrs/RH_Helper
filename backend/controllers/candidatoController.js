@@ -1,17 +1,19 @@
 const Candidato = require("../models/candidatoModel");
+const Cargo = require("../models/cargoModel");
+const Status = require("../models/statusModel");
 const Usuario = require("../models/usuarioModel");
 
 module.exports = class CandidatoController {
-  static async getCandidatos(req, res) {
-    const candidatos = await buscarTodasCandidatos(
-      req.usuario ? req.usuario.id : 0
-    );
+  // static async getCandidatos(req, res) {
+  //   const candidatos = await buscarTodasCandidatos(
+  //     req.usuario ? req.usuario.id : 0
+  //   );
 
-    res.status(200).json({
-      message: `${candidatos.length} candidatos encontradas...`,
-      candidatos,
-    });
-  }
+  //   res.status(200).json({
+  //     message: `${candidatos.length} candidatos encontradas...`,
+  //     candidatos,
+  //   });
+  // }
 
   static async adicionarCandidato(req, res) {
     try {
@@ -27,7 +29,8 @@ module.exports = class CandidatoController {
           ? req.body.cidadeNaturalidade[0]
           : "",
         endereco: req.body.endereco ? req.body.endereco[0] : "",
-        status: req.body.status ? req.body.status[0] : undefined,
+        StatusId: req.body.status ? req.body.status[0] : undefined,
+        CargoId: req.body.cargo ? req.body.cargo[0] : undefined,
         obsStatus: req.body.obsStatus ? req.body.obsStatus[0] : "",
         UsuarioId: req.usuario.id,
       };
@@ -46,7 +49,6 @@ module.exports = class CandidatoController {
         return;
       }
 
-      console.log(candidato);
       const candidatoCadastrado = await Candidato.create(candidato);
       res.status(201).json({
         message: "Candidato cadastrada com sucesso!",
@@ -58,9 +60,9 @@ module.exports = class CandidatoController {
     }
   }
 
-  static async buscarCandidatosDoUsuario(usuarioId, idUsuarioAutenticado) {
-    return buscarCandidatosDoUsuario(usuarioId, idUsuarioAutenticado);
-  }
+  // static async buscarCandidatosDoUsuario(usuarioId, idUsuarioAutenticado) {
+  //   return buscarCandidatosDoUsuario(usuarioId, idUsuarioAutenticado);
+  // }
 
   static async removerCandidato(req, res) {
     let status;
@@ -105,11 +107,17 @@ module.exports = class CandidatoController {
             model: Usuario,
             attributes: ["nome", "login", "id", "urlImagemPerfil"],
           },
+          {
+            model: Status,
+          },
+          {
+            model: Cargo,
+          },
         ],
         where: {
           UsuarioId: req.usuario.id,
         },
-        group: ["Candidato.id", "Usuario.id"],
+        group: ["Candidato.id", "Usuario.id", "Status.id", "Cargo.id"],
         order: [["updatedAt", "DESC"]],
       });
 

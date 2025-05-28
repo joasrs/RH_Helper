@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Input, InputButton, InputPassword } from "../../form/Input";
 import { Context } from '../../../context/UsuarioContext'
 import { Link } from "react-router-dom";
-import styles from './CadastroUsuario.module.css'
+import styles from './UsuarioCadastro.module.css'
 import useErroPadrao from "../../../hooks/useErroPadrao";
 
 function Register() {

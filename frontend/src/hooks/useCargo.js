@@ -3,7 +3,7 @@ import useFlashMessage from "./useFlashMessages";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useCallback } from "react";
 
-export default function useCandidato() {
+export default function useCargo() {
   const { setFlashMessage } = useFlashMessage();
   const navigate = useNavigate();
   useEffect(() => {
@@ -13,12 +13,12 @@ export default function useCandidato() {
     }
   }, []);
 
-  const consultarCandidatos = useCallback(async () => {
+  const consultarCargos = useCallback(async () => {
     try {
       return await api
-        .get("/candidato")
+        .get("/cargo")
         .then((response) => {
-          return response.data.candidatos;
+          return response.data.cargos;
         })
         .catch((error) => {
           throw new Error(error);
@@ -28,19 +28,34 @@ export default function useCandidato() {
     }
   }, []);
 
-  const adicionarCandidato = useCallback(
-    (candidato) => {
-      return api.post("candidato/add", candidato).then((response) => {
-        setFlashMessage("Candidato cadastrado com sucesso!", "success");
+  const buscarItensCombo = useCallback(async () => {
+    try {
+      return await api
+        .get("/cargo/combo")
+        .then((response) => {
+          return response.data.cargos;
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }, []);
+
+  const adicionarCargo = useCallback(
+    (cargo) => {
+      return api.post("cargo/add", cargo).then((response) => {
+        setFlashMessage("Cargo cadastrado com sucesso!", "success");
         navigate("/");
       });
     },
     [setFlashMessage, navigate]
   );
 
-  const removerCandidato = useCallback(
-    (idReview) => {
-      return api.delete("candidato/" + idReview).then((response) => {
+  const removerCargo = useCallback(
+    (idCargo) => {
+      return api.delete("cargo/" + idCargo).then((response) => {
         setFlashMessage(
           response.data.message,
           response.status === 200 ? "success" : "error"
@@ -52,5 +67,5 @@ export default function useCandidato() {
     [setFlashMessage]
   );
 
-  return { consultarCandidatos, adicionarCandidato, removerCandidato };
+  return { consultarCargos, adicionarCargo, removerCargo, buscarItensCombo };
 }

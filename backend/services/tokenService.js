@@ -40,6 +40,7 @@ async function validarToken(token, req, res) {
       ).get({ plain: true });
 
       req.usuario.senha = undefined;
+
       return true;
     });
   } catch (error) {

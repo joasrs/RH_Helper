@@ -36,7 +36,7 @@ export default function CardCandidato({candidato, onClickRemoverCandidato}) {
         //     </div>
         //     <div className="card-footer bg-transparent border-success">Status: {candidato.obsStatus}</div>
         // </div>
-    
+    console.log();
     return (
         <>
             <div className={`card mb-3 ` + styles.card}>
@@ -54,10 +54,15 @@ export default function CardCandidato({candidato, onClickRemoverCandidato}) {
                     </div>
                     <div className={styles.campo}>
                         <span className={styles.titulo}>Cargo:</span>
-                        <span className={styles.conteudo}>{candidato.email}</span>       
+                        <span className={styles.conteudo}>{candidato.Cargo?.descricao}</span>       
                     </div>
                 </div>
-                <div className="card-footer bg-transparent">Status: {candidato.obsStatus}</div>
+                <div className={`card-footer bg-transparent ${styles.div_status}`}> 
+                    <span>Status:</span>
+                    {candidato.Status && <div className={styles.div_status_cor} style={{backgroundColor: `${candidato.Status?.cor}`}}>
+                        {candidato.Status?.descricao}
+                    </div>}
+                </div>
             </div>
 
             <div className={`modal fade ` + styles.modal} id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

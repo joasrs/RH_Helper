@@ -1,6 +1,8 @@
 const { DataTypes } = require("sequelize");
 const conexao = require("../DB/conn");
 const Usuario = require("./usuarioModel");
+const Cargo = require("./cargoModel");
+const Status = require("./statusModel");
 const modelService = require("../services/modelService");
 
 const Candidato = conexao.define("Candidato", {
@@ -56,6 +58,22 @@ Usuario.hasMany(Candidato, {
   onDelete: "CASCADE",
 });
 Candidato.belongsTo(Usuario);
+
+Candidato.belongsTo(Cargo, {
+  foreignKey: {
+    name: "CargoId",
+    allowNull: true,
+  },
+  onDelete: "SET NULL",
+});
+
+Candidato.belongsTo(Status, {
+  foreignKey: {
+    name: "StatusId",
+    allowNull: true,
+  },
+  onDelete: "SET NULL",
+});
 
 Candidato.sync()
   //.sync({ force: true })

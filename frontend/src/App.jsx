@@ -1,23 +1,24 @@
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./components/Pages/Home";
 import Login from "./components/Pages/auth/Login";
-import CadastroUsuario from "./components/Pages/auth/CadastroUsuario";
+import UsuarioCadastro from "./components/Pages/auth/UsuarioCadastro";
 import Navbar from "./components/Layout/Navbar";
 import Container from "./components/Layout/Container";
 import { UsuarioProvider } from "./context/UsuarioContext";
 import Mensagem from "./components/Layout/Mensagem";
-import CadastroCandidato from "./components/Pages/candidato/CadastroCandidato";
 import MenuLateral from "./components/Layout/MenuLateral/MenuLateral";
 import CargoCadastro from "./components/Pages/cargo/CargoCadastro";
+import StatusCadastro from "./components/Pages/status/StatusCadastro";
+import PaginaNaoEncontrada from "./components/Pages/PaginaNaoEncontrada";
+import CandidatoCadastro from "./components/Pages/candidato/CandidatoCadastro";
 
 function AppComposicao(){
   const location = useLocation();
 
   // Páginas que NÃO devem mostrar o menu
-  const ocultarPaginas = ['/login', '/cadastro-usuario'];
+  const mostrarMenuPaginas = ['/', '/cadastro-candidato', '/status', '/cadastro-status', '/cargo', '/cadastro-cargo'];
 
-  const mostrarMenuLateral = !ocultarPaginas.includes(location.pathname);
-
+  const mostrarMenuLateral = mostrarMenuPaginas.includes(location.pathname);
   return (
     <UsuarioProvider>
           <Navbar />
@@ -27,17 +28,18 @@ function AppComposicao(){
               <MenuLateral>
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/cadastro-candidato" element={<CadastroCandidato />} />
-                  <Route path="/status" element={<CadastroCandidato />} />
-                  <Route path="/cadastro-status" element={<CadastroCandidato />} />
-                  <Route path="/cargo" element={<CadastroCandidato />} />
+                  <Route path="/cadastro-candidato" element={<CandidatoCadastro />} />
+                  <Route path="/cargo" element={<Home />} />
                   <Route path="/cadastro-cargo" element={<CargoCadastro />} />
+                  <Route path="/status" element={<Home />} />
+                  <Route path="/cadastro-status" element={<StatusCadastro />} />
                 </Routes>
               </MenuLateral>
             ) : (
               <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/cadastro-usuario" element={<CadastroUsuario />} />
+                <Route path="/cadastro-usuario" element={<UsuarioCadastro />} />
+                <Route path="*" element={<PaginaNaoEncontrada />} />
               </Routes>
             )}
           </Container>

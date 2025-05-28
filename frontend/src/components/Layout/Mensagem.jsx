@@ -26,10 +26,6 @@ export default function Mensagem(){
         } );
     }, []);
 
-{/* <div class="alert alert-success" role="alert">
-  A simple success alert—check it out!
-  <div className={`alert ${styles.message} ${styles[tipo]}`} role="alert">{mensagem}</div>
-</div> */}
     return (    
         visivel && ( <Alert variant="filled" className={styles.message} severity={tipo}>{mensagem}</Alert>)
     )

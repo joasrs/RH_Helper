@@ -4,6 +4,8 @@ const app = express();
 const cors = require("cors");
 const usuariosRouters = require("./routers/usuariosRouters");
 const candidatoRouters = require("./routers/candidatoRouters");
+const cargoRouters = require("./routers/cargoRouters");
+const statusRouters = require("./routers/statusRouters");
 const porta = process.env.PORT;
 
 app.use(
@@ -21,6 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 // seta os routers nos middlewares, ** tem que importar o router antes
 app.use("/usuario", usuariosRouters);
 app.use("/candidato", candidatoRouters);
+app.use("/cargo", cargoRouters);
+app.use("/status", statusRouters);
 
 //rota padrão
 app.get("/", (req, res) => {

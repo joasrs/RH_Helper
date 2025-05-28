@@ -36,3 +36,14 @@ display: block;
 .modal{
     z-index: 999;
 }
+
+.div_status{
+    display: flex;
+}
+
+.div_status_cor {
+  padding: 0px 40px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}

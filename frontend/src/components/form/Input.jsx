@@ -1,16 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Input.module.css';
+import useErroPadrao from '../../hooks/useErroPadrao';
 
-function Input({tipo, name, descricao, valor, mensagemInvalido, onChange}){
+function Input({tipo, name, descricao, valor, mensagemInvalido, onChange, required = true}){
     return (
         <div className={styles.form_control}>
             <div className="form-floating">
-                <input className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange} required/>
+                {required ? <input className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange} required/> :
+                <input className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange}/> }
                 <label>{descricao}</label>
             </div>
             <span className="invalid-feedback">{mensagemInvalido}</span>  
         </div>
     )
+}   
+
+function Select({name, descricao, useApi, onChange}){
+    const { buscarItensCombo } = useApi();
+    const [itensCombo, setItensCombo] = useState([]);
+    const { setErroPadrao } = useErroPadrao();
+
+    useEffect(() => {
+        if(buscarItensCombo){
+            buscarItensCombo().then((result) => {
+                setItensCombo(result);
+            }).catch((error) => setErroPadrao(error));
+        }
+    }, [buscarItensCombo, setErroPadrao]);
+
+    return (
+        <select name={name} className="form-select" onChange={onChange}>
+            <option value="" defaultValue hidden>Selecionar {descricao}</option>
+            {itensCombo && itensCombo.map(i=> <option key={i.id} value={i.id}>{i.descricao}</option>)}
+        </select>
+    );
 }
 
 function InputButton({name, descricao, submmit = false, classeIcone, onClick, loading}){
@@ -78,4 +101,4 @@ function InputPassword({name, descricao, valor, onChange}){
     )
 }
 
-export { Input, InputButton, InputTextArea, InputPassword }
+export { Input, InputButton, InputTextArea, InputPassword, Select }

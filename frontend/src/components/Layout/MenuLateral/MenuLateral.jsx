@@ -6,15 +6,15 @@ export default function MenuLateral({children}) {
   const itens = [{
     icone: "bi bi-person-badge",
     descricao: "Candidatos",
-    subItens: [{descricao: "Consultar Candidatos", icone: "bi bi-search", rota: "/"}, {descricao: "Cadastrar Candidatos", icone: "bi bi-plus", rota: "/cadastro-candidato"}]
+    subItens: [{descricao: "Consultar Candidatos", icone: "bi bi-search", rota: "/"}, {descricao: "Adicionar Candidatos", icone: "bi bi-plus", rota: "/cadastro-candidato"}]
   }, {
     icone: "bi bi-person-fill-exclamation",
     descricao: "Status",
-    subItens: [{descricao: "Consultar Status", icone: "bi bi-search", rota: "/status"}, {descricao: "Cadastrar Status", icone: "bi bi-plus", rota: "/cadastro-status"}]
+    subItens: [{descricao: "Consultar Status", icone: "bi bi-search", rota: "/status"}, {descricao: "Adicionar Status", icone: "bi bi-plus", rota: "/cadastro-status"}]
   },{
     icone: "bi bi-briefcase-fill",
     descricao: "Cargo",
-    subItens: [{descricao: "Consultar Cargo", icone: "bi bi-search", rota: "/cargo"}, {descricao: "Cadastrar Cargo", icone: "bi bi-plus", rota: "/cadastro-cargo"}]
+    subItens: [{descricao: "Consultar Cargo", icone: "bi bi-search", rota: "/cargo"}, {descricao: "Adicionar Cargo", icone: "bi bi-plus", rota: "/cadastro-cargo"}]
   }]
 
   return (
