@@ -11,6 +11,8 @@ import CargoCadastro from "./components/Pages/cargo/CargoCadastro";
 import StatusCadastro from "./components/Pages/status/StatusCadastro";
 import PaginaNaoEncontrada from "./components/Pages/PaginaNaoEncontrada";
 import CandidatoCadastro from "./components/Pages/candidato/CandidatoCadastro";
+import StatusConsulta from "./components/Pages/status/StatusConsulta";
+import CargoConsulta from "./components/Pages/cargo/CargoConsulta";
 
 function AppComposicao(){
   const location = useLocation();
@@ -29,9 +31,9 @@ function AppComposicao(){
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/cadastro-candidato" element={<CandidatoCadastro />} />
-                  <Route path="/cargo" element={<Home />} />
+                  <Route path="/cargo" element={<CargoConsulta />} />
                   <Route path="/cadastro-cargo" element={<CargoCadastro />} />
-                  <Route path="/status" element={<Home />} />
+                  <Route path="/status" element={<StatusConsulta />} />
                   <Route path="/cadastro-status" element={<StatusCadastro />} />
                 </Routes>
               </MenuLateral>

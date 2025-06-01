@@ -27,7 +27,7 @@ export default function StatusCadastro(){
         <form className={styles.form_status} onSubmit={onSubmit}>
             <Input tipo="text" name="descricao" descricao="Descrição do Status" onChange={handleChange}/>
             <Input tipo="text" name="obs" descricao="Observação" onChange={handleChange} />
-            <Input tipo="color" name="cor" valor="#cfcfcf" descricao="Cor do status" onChange={handleChange} required={false}/>
+            <Input tipo="color" name="cor" descricao="Cor do status" onChange={handleChange} required={false}/>
 
             <InputButton descricao="Cadastrar Status" submmit={true} classeIcone="bi bi-send" loading={loading}/>
         </form>

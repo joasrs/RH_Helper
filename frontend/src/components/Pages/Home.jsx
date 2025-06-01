@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import useErroPadrao from "../../hooks/useErroPadrao";
 import styles from "./Home.module.css"
 import useCandidato from "../../hooks/useCandidato";
-import { InputButton } from "../form/Input";
 import { useNavigate } from "react-router-dom";
 import CardCandidato from "../Components/CardCandidato";
 
@@ -36,13 +35,13 @@ export default  function Home() {
     }
          
     return (
-        <div className={styles.div_home}>
-            <h2 style={{textAlign: "center"}}>Candidatos</h2>
-            {
-                candidatos && candidatos.map((e, index) => (
-                    <CardCandidato key={index} candidato={e} onClickRemoverCandidato={handleClickRemoverCandidato}/>              
-                ))
-            }
-        </div>
+            <div className={styles.div_home}>
+                <h2 style={{textAlign: "center"}}>Candidatos</h2>
+                {
+                    candidatos && candidatos.map((e, index) => (
+                        <CardCandidato key={index} candidato={e} onExcluirCandidato={handleClickRemoverCandidato}/>              
+                    ))
+                }
+            </div>
     )
 }

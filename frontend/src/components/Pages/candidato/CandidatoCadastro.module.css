@@ -1,9 +1,11 @@
 .form_candidato {
     /* margin-top: 30px; */
-    max-width: 600px;
+    max-width: 1000px;
     width: 100%;
     margin: auto;
     margin-top: 20px;
+    display: grid;
+    column-gap: 50px;
 }
 
 .div_titulo{
@@ -15,4 +17,22 @@
 .container_cadastro_review{
     padding-top: 30px;
     display: flex;
+}
+
+.teste_coluna{
+     display: grid;
+     grid-template-columns: auto auto auto auto;
+     gap: 10px 20px;
+}
+
+.duas_colunas{
+    grid-column: 1 / span 2;
+}
+
+.quatro_colunas{
+    grid-column: 1 / span 4;
+}
+
+.tres_colunas{
+    grid-column: 1 / span 3;
 }

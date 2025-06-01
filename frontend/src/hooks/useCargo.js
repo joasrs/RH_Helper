@@ -47,7 +47,7 @@ export default function useCargo() {
     (cargo) => {
       return api.post("cargo/add", cargo).then((response) => {
         setFlashMessage("Cargo cadastrado com sucesso!", "success");
-        navigate("/");
+        navigate("/cargo");
       });
     },
     [setFlashMessage, navigate]

@@ -10,7 +10,6 @@ function Input({tipo, name, descricao, valor, mensagemInvalido, onChange, requir
                 <input className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange}/> }
                 <label>{descricao}</label>
             </div>
-            <span className="invalid-feedback">{mensagemInvalido}</span>  
         </div>
     )
 }   
@@ -29,7 +28,7 @@ function Select({name, descricao, useApi, onChange}){
     }, [buscarItensCombo, setErroPadrao]);
 
     return (
-        <select name={name} className="form-select" onChange={onChange}>
+        <select name={name} className="form-select" onChange={onChange} style={{height: 58}}>
             <option value="" defaultValue hidden>Selecionar {descricao}</option>
             {itensCombo && itensCombo.map(i=> <option key={i.id} value={i.id}>{i.descricao}</option>)}
         </select>

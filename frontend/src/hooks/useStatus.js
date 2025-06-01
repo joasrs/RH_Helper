@@ -47,7 +47,7 @@ export default function useStatus() {
     (status) => {
       return api.post("status/add", status).then((response) => {
         setFlashMessage("Status cadastrado com sucesso!", "success");
-        navigate("/");
+        navigate("/status");
       });
     },
     [setFlashMessage, navigate]
