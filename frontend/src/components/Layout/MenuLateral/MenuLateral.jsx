@@ -15,6 +15,10 @@ export default function MenuLateral({children}) {
     icone: "bi bi-briefcase-fill",
     descricao: "Cargo",
     subItens: [{descricao: "Consultar Cargo", icone: "bi bi-search", rota: "/cargo"}, {descricao: "Adicionar Cargo", icone: "bi bi-plus", rota: "/cadastro-cargo"}]
+  },{
+    icone: "bi bi-bar-chart-steps",
+    descricao: "Trilhas",
+    subItens: [{descricao: "Consultar Trilhas", icone: "bi bi-search", rota: "/trilha"}, {descricao: "Adicionar Trilha", icone: "bi bi-plus", rota: "/cadastro-trilha"}]
   }]
 
   return (

@@ -18,34 +18,28 @@ function AppComposicao(){
   const location = useLocation();
 
   // Páginas que NÃO devem mostrar o menu
-  const mostrarMenuPaginas = ['/', '/cadastro-candidato', '/status', '/cadastro-status', '/cargo', '/cadastro-cargo'];
-
+  const mostrarMenuPaginas = ['/', '/cadastro-candidato', '/status', '/cadastro-status', '/cargo', '/cadastro-cargo', '/trilha', '/cadastro-trilha'];
   const mostrarMenuLateral = mostrarMenuPaginas.includes(location.pathname);
+
   return (
     <UsuarioProvider>
-          <Navbar />
-          <Mensagem msg="" tipo="" />
-          <Container>
-            {mostrarMenuLateral ? (
-              <MenuLateral>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/cadastro-candidato" element={<CandidatoCadastro />} />
-                  <Route path="/cargo" element={<CargoConsulta />} />
-                  <Route path="/cadastro-cargo" element={<CargoCadastro />} />
-                  <Route path="/status" element={<StatusConsulta />} />
-                  <Route path="/cadastro-status" element={<StatusCadastro />} />
-                </Routes>
-              </MenuLateral>
-            ) : (
-              <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/cadastro-usuario" element={<UsuarioCadastro />} />
-                <Route path="*" element={<PaginaNaoEncontrada />} />
-              </Routes>
-            )}
-          </Container>
-        </UsuarioProvider>
+      <Navbar />
+      <Mensagem msg="" tipo="" />
+      <Container>          
+          { mostrarMenuLateral && <MenuLateral/> }
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cadastro-candidato" element={<CandidatoCadastro />} />
+            <Route path="/cargo" element={<CargoConsulta />} />
+            <Route path="/cadastro-cargo" element={<CargoCadastro />} />
+            <Route path="/status" element={<StatusConsulta />} />
+            <Route path="/cadastro-status" element={<StatusCadastro />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/cadastro-usuario" element={<UsuarioCadastro />} />
+            <Route path="*" element={<PaginaNaoEncontrada />} />
+          </Routes>
+      </Container>
+    </UsuarioProvider>
       )
 }
 

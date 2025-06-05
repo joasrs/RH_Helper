@@ -30,11 +30,11 @@ function Register() {
                 <h4><span>Facilite sua rotina de seleção! </span>Cadastre-se agora e comece a cadastrar e acompanhar currículos com poucos cliques!</h4>
             </div>
             <form className={styles.form_usuario} onSubmit={handleSubmit} >
-                <Input tipo="text" name="nome" descricao="Nome" placeholder="Nome aqui" mensagemInvalido="deu erro" onChange={handleChange} />
-                <Input tipo="email" name="email" descricao="E-mail" placeholder="E-mail aqui"  onChange={handleChange} />
-                <Input tipo="text" name="login" descricao="Login" placeholder="Login aqui" onChange={handleChange}  />
+                <Input tipo="text" name="nome" descricao="Nome" placeholder="Nome aqui" mensagemInvalido="deu erro" onChange={handleChange} valor={usuario.nome}/>
+                <Input tipo="email" name="email" descricao="E-mail" placeholder="E-mail aqui"  onChange={handleChange} valor={usuario.email}/>
+                <Input tipo="text" name="login" descricao="Login" placeholder="Login aqui" onChange={handleChange} valor={usuario.login}/>
                 <InputPassword name="senha" descricao="Senha" onChange={handleChange} />
-                <Input tipo="password" name="senhaConfirmacao" descricao="Confirmar Senha" placeholder="Confirmar Senha aqui" onChange={handleChange}/>
+                <Input tipo="password" name="senhaConfirmacao" descricao="Confirmar Senha" placeholder="Confirmar Senha aqui" onChange={handleChange} valor={usuario.senhaConfirmacao}/>
                 <InputButton descricao="Cadastrar" submmit={true} classeIcone="bi bi-box-arrow-in-right" loading={loading}/>
                 <p>Já possui uma conta? <Link to="/login">Clique aqui.</Link> </p>
             </form>

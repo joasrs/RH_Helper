@@ -18,6 +18,7 @@ module.exports = class CandidatoController {
   static async adicionarCandidato(req, res) {
     try {
       const candidato = {
+        id: req.body.id,
         nome: req.body.nome ? req.body.nome[0] : "",
         dataNascimento: req.body.dataNascimento
           ? req.body.dataNascimento[0]
@@ -49,20 +50,22 @@ module.exports = class CandidatoController {
         return;
       }
 
-      const candidatoCadastrado = await Candidato.create(candidato);
+      const candidatoIncluido =
+        candidato.id > 0
+          ? await Candidato.update(candidato, { where: { id: candidato.id } })
+          : await Candidato.create(candidato);
+
       res.status(201).json({
-        message: "Candidato cadastrada com sucesso!",
-        candidato: candidatoCadastrado,
+        message: `Candidato ${
+          candidato.id ? "alterado" : "incluído"
+        } com sucesso!`,
+        candidato: candidatoIncluido,
       });
     } catch (error) {
-      console.log("Erro ao candidatar usuário: " + error);
+      console.log(`Erro ao adicionar o candidato: ${error}`);
       res.status(500).json({ message: error });
     }
   }
-
-  // static async buscarCandidatosDoUsuario(usuarioId, idUsuarioAutenticado) {
-  //   return buscarCandidatosDoUsuario(usuarioId, idUsuarioAutenticado);
-  // }
 
   static async removerCandidato(req, res) {
     let status;

@@ -30,7 +30,7 @@ export default function Login() {
             </div>
             <div className={styles.div_form_login}>
                 <form onSubmit={handleSubmit} className={styles.form_login}>
-                    <Input tipo="text" name="login" descricao="Login" placeholder="Login" onChange={handleChange}/>
+                    <Input tipo="text" name="login" descricao="Login" placeholder="Login" onChange={handleChange} valor={usuario.login}/>
                     <InputPassword name="senha" descricao="Senha" onChange={handleChange}/>
                     <InputButton descricao="Entrar" submmit={true} classeIcone="bi bi-box-arrow-in-right" loading={loading}/>
                 </form>

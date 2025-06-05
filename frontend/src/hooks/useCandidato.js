@@ -31,7 +31,7 @@ export default function useCandidato() {
   const adicionarCandidato = useCallback(
     (candidato) => {
       return api.post("candidato/add", candidato).then((response) => {
-        setFlashMessage("Candidato cadastrado com sucesso!", "success");
+        setFlashMessage(response.data.message, "success");
         navigate("/");
       });
     },
@@ -45,6 +45,10 @@ export default function useCandidato() {
           response.data.message,
           response.status === 200 ? "success" : "error"
         );
+
+        if (response.status === 200) {
+          navigate("/");
+        }
 
         return response.status;
       });

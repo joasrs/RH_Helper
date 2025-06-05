@@ -2,10 +2,13 @@
     /* margin-top: 30px; */
     max-width: 1000px;
     width: 100%;
-    margin: auto;
-    margin-top: 20px;
-    display: grid;
-    column-gap: 50px;
+    /* height: 800px; */
+    /* margin: auto; */
+    /* margin-top: 20px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px auto 20px auto;
 }
 
 .div_titulo{
@@ -19,20 +22,9 @@
     display: flex;
 }
 
-.teste_coluna{
-     display: grid;
-     grid-template-columns: auto auto auto auto;
-     gap: 10px 20px;
-}
-
-.duas_colunas{
-    grid-column: 1 / span 2;
-}
-
-.quatro_colunas{
-    grid-column: 1 / span 4;
-}
-
-.tres_colunas{
-    grid-column: 1 / span 3;
+.form_grid{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px 20px;
+    align-content: start;
 }

@@ -3,7 +3,7 @@ import Dialog from '../Layout/Dialog/Dialog'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
-export default function CardCandidato({ candidato, onExcluirCandidato }) {
+export default function CardCandidato({ candidato }) {
     const [abrirDialog, setAbrirDialog] = useState(false);
     const navigate = useNavigate();
 
@@ -11,14 +11,7 @@ export default function CardCandidato({ candidato, onExcluirCandidato }) {
         <>
             <div className={styles.card} onClick={() => navigate('/cadastro-candidato', { state: candidato })}>
                 <div className={styles.header}>
-                    <h5>{candidato.nome}</h5>
-                    <button 
-                        onClick={() => setAbrirDialog(true)} 
-                        className={styles.botaoExcluir}
-                        aria-label="Excluir candidato"
-                    >
-                        ✖
-                    </button>
+                    <h5>{candidato.nome}</h5>                 
                 </div>
 
                 <div className={styles.body}>
@@ -76,14 +69,6 @@ export default function CardCandidato({ candidato, onExcluirCandidato }) {
                     )}
                 </div>
             </div>
-
-            <Dialog 
-                abrir={abrirDialog} 
-                titulo="Excluir Candidato" 
-                mensagem="Deseja realmente excluir o candidato?" 
-                eventoBotaoSim={() => onExcluirCandidato && onExcluirCandidato(candidato.id)} 
-                onFechar={() => setAbrirDialog(false)} 
-            />
         </>
     );
 }

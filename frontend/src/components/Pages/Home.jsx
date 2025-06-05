@@ -8,7 +8,7 @@ import CardCandidato from "../Components/CardCandidato";
 export default  function Home() {
     const [candidatos, setCandidatos] = useState([]);
     const [carregando, setCarregando] = useState(true);
-    const { consultarCandidatos, removerCandidato } = useCandidato();
+    const { consultarCandidatos } = useCandidato();
     const { setErroPadrao } = useErroPadrao();
     const navigate = useNavigate();
 
@@ -25,23 +25,15 @@ export default  function Home() {
             navigate("/login");
         }
     }, [consultarCandidatos, setErroPadrao]);
-
-    function handleClickRemoverCandidato(idCandidato){
-        removerCandidato(idCandidato).then((status) => {
-            if(status && status === 200){
-                setCandidatos(candidatos.filter( e => e.id != idCandidato ));
-            }
-        }).catch((error) => setErroPadrao(error));
-    }
          
     return (
-            <div className={styles.div_home}>
-                <h2 style={{textAlign: "center"}}>Candidatos</h2>
-                {
-                    candidatos && candidatos.map((e, index) => (
-                        <CardCandidato key={index} candidato={e} onExcluirCandidato={handleClickRemoverCandidato}/>              
-                    ))
-                }
-            </div>
+        <div className={styles.div_home}>
+            <h2 style={{textAlign: "center"}}>Candidatos</h2>
+            {
+                candidatos && candidatos.map((e, index) => (
+                    <CardCandidato key={index} candidato={e}/>              
+                ))
+            }
+        </div>
     )
 }

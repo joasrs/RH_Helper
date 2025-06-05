@@ -2,40 +2,47 @@ import { useState, useEffect } from 'react';
 import styles from './Input.module.css';
 import useErroPadrao from '../../hooks/useErroPadrao';
 
-function Input({tipo, name, descricao, valor, mensagemInvalido, onChange, required = true}){
+function Input({tipo, name, descricao, valor, onChange, required = true, desabilitado = false, colunaInicio, colunaFim}){
     return (
-        <div className={styles.form_control}>
+        <div className={`${styles.form_control} ${styles[`tamanho_coluna_${colunaInicio}_${colunaFim}`]}`}>
             <div className="form-floating">
-                {required ? <input className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange} required/> :
-                <input className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange}/> }
+                {required ?  
+                    <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor || ''} placeholder="placeholder" onChange={onChange} required/> :
+                    <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor || ''} placeholder="placeholder" onChange={onChange}/> }
                 <label>{descricao}</label>
             </div>
         </div>
     )
 }   
 
-function Select({name, descricao, useApi, onChange}){
+function Select({name, descricao, useApi, onChange, desabilitado = false, valor}){
     const { buscarItensCombo } = useApi();
     const [itensCombo, setItensCombo] = useState([]);
+    const [valorSelecionado, setValorSelecionado] = useState(valor);
     const { setErroPadrao } = useErroPadrao();
 
     useEffect(() => {
         if(buscarItensCombo){
             buscarItensCombo().then((result) => {
-                setItensCombo(result);
+                setItensCombo(result );
             }).catch((error) => setErroPadrao(error));
         }
     }, [buscarItensCombo, setErroPadrao]);
 
+    function onChangeValor(e) {
+        setValorSelecionado(e.target.value);
+        onChange && onChange(e);
+    }
+
     return (
-        <select name={name} className="form-select" onChange={onChange} style={{height: 58}}>
+        <select disabled={desabilitado} name={name} className="form-select" onChange={onChangeValor} style={{height: 58}} value={valorSelecionado}>
             <option value="" defaultValue hidden>Selecionar {descricao}</option>
             {itensCombo && itensCombo.map(i=> <option key={i.id} value={i.id}>{i.descricao}</option>)}
         </select>
     );
 }
 
-function InputButton({name, descricao, submmit = false, classeIcone, onClick, loading}){
+function InputButton({name, descricao, submmit = false, classeIcone, onClick, loading, cor, habilitado = true}){
     const [desabilitado, setDesabilitado] = useState(false);
 
     async function handleClick(e){
@@ -53,10 +60,10 @@ function InputButton({name, descricao, submmit = false, classeIcone, onClick, lo
 
     return (
         <div className={styles.form_control}>
-            <button disabled={desabilitado || loading} onClick={handleClick} className={styles.botao + " form-control " + styles.input_gradiente} type={submmit? "submit":"button"} name={name} id={name}>
+            <button disabled={desabilitado || loading || !habilitado} onClick={handleClick} className={styles.botao + " form-control " + styles[cor]} type={submmit? "submit":"button"} name={name} id={name}>
             
             {
-                desabilitado || loading ? 
+                (desabilitado || loading) ? 
                 <span className={`spinner-border spinner-border-sm ${styles.spinner}`} aria-hidden="true"></span>
                 :
                 <>
@@ -100,4 +107,13 @@ function InputPassword({name, descricao, valor, onChange}){
     )
 }
 
-export { Input, InputButton, InputTextArea, InputPassword, Select }
+function FileInput({name, descricao, valor, onChange}){
+    return (
+        <div className={`mb-3 ${styles.input_file}`}>
+           <label htmlFor="formFile" className="form-label">Selecionar arquivo de currículo</label>
+           <input name={name} className="form-control" type="file" id="formFile" onChange={onChange}></input>
+        </div>
+    )
+}
+
+export { Input, InputButton, InputTextArea, InputPassword, Select, FileInput }
