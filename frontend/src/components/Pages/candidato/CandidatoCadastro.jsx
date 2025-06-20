@@ -17,7 +17,7 @@ export default function CandidatoCadastro(){
     const [inputHabilitado, setImputHabilitado] = useState(Object.keys(candidato).length > 0);
 
     function handleChange(e){
-        setCandidato({...candidato, [e.target.name]: [e.target.value] });
+        setCandidato({...candidato, [e.target.name]: e.target.value });
     }
 
     function onSubmit(e){
@@ -42,11 +42,11 @@ export default function CandidatoCadastro(){
                 <Input desabilitado={inputHabilitado} tipo="text" name="email" descricao="E-mail" onChange={handleChange} valor={candidato.email}  colunaInicio={1} colunaFim={2}/>
                 <Input desabilitado={inputHabilitado} tipo="text" name="cpf" descricao="CPF" onChange={handleChange} valor={candidato.cpf} />
                 <Input desabilitado={inputHabilitado} tipo="text" name="cidadeNaturalidade" descricao="Cidade Naturalidade" onChange={handleChange} valor={candidato.cidadeNaturalidade} />
-                <Input desabilitado={inputHabilitado} tipo="text" name="endereco" descricao="Endereço" onChange={handleChange} valor={candidato.endereco}  colunaInicio={1} colunaFim={3}/>
+                <Input desabilitado={inputHabilitado} tipo="tel" name="endereco" descricao="Endereço" onChange={handleChange} valor={candidato.endereco}  colunaInicio={1} colunaFim={3}/>
                 <Input desabilitado={inputHabilitado} tipo="file" name="curriculo" descricao="Arquivo do currículo" onChange={handleChange} valor={candidato.curriculo} required={false}/>
-                <Select desabilitado={inputHabilitado} name="status" descricao="Status" useApi={useStatus} onChange={handleChange}  colunaInicio={1} colunaFim={1} valor={candidato.Status?.id}/>
+                <Select desabilitado={inputHabilitado} name="StatusId" descricao="Status" useApi={useStatus} onChange={handleChange}  colunaInicio={1} colunaFim={1} valor={candidato.Status?.id}/>
                 <Input desabilitado={inputHabilitado} tipo="text" name="obsStatus" descricao="Observação do Status" onChange={handleChange} valor={candidato.obsStatus}  colunaInicio={2} colunaFim={3}/>
-                <Select desabilitado={inputHabilitado} name="cargo" descricao="Cargo" useApi={useCargo} onChange={handleChange} valor={candidato.Cargo?.id}/>
+                <Select desabilitado={inputHabilitado} name="CargoId" descricao="Cargo" useApi={useCargo} onChange={handleChange} valor={candidato.Cargo?.id}/>
             </div>
             <BarraBotoes excluirHabilitado={inputHabilitado} 
                          alterarHabilitado={inputHabilitado} 

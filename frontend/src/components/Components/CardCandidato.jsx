@@ -32,7 +32,7 @@ export default function CardCandidato({ candidato }) {
                         </div>
                         <div className={styles.campo}>
                             <span className={styles.titulo}>Nascimento:</span>
-                            <span className={styles.conteudo}>{candidato.dataNascimento}</span>
+                            <span className={styles.conteudo}>{candidato.dataNascimentoFormatada}</span>
                         </div>
                     </div>
                     <div className={styles.row}>
