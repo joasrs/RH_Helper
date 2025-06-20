@@ -13,10 +13,11 @@ const Candidato = conexao.define("Candidato", {
   dataNascimento: {
     type: DataTypes.DATE,
     allowNull: false,
+  },
+  dataNascimentoFormatada: {
+    type: DataTypes.VIRTUAL,
     get() {
-      return modelService.formataDataDDMMAAAA(
-        this.getDataValue("dataNascimento")
-      );
+      return modelService.formataDataDDMMAAAA(this.dataNascimento);
     },
   },
   cpf: {

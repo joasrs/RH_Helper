@@ -4,37 +4,13 @@ const Status = require("../models/statusModel");
 const Usuario = require("../models/usuarioModel");
 
 module.exports = class CandidatoController {
-  // static async getCandidatos(req, res) {
-  //   const candidatos = await buscarTodasCandidatos(
-  //     req.usuario ? req.usuario.id : 0
-  //   );
-
-  //   res.status(200).json({
-  //     message: `${candidatos.length} candidatos encontradas...`,
-  //     candidatos,
-  //   });
-  // }
-
   static async adicionarCandidato(req, res) {
     try {
-      const candidato = {
-        id: req.body.id,
-        nome: req.body.nome ? req.body.nome[0] : "",
-        dataNascimento: req.body.dataNascimento
-          ? req.body.dataNascimento[0]
-          : "",
-        email: req.body.email ? req.body.email[0] : "",
-        cpf: req.body.cpf ? req.body.cpf[0] : "",
-        telefone: req.body.telefone ? req.body.telefone[0] : "",
-        cidadeNaturalidade: req.body.cidadeNaturalidade
-          ? req.body.cidadeNaturalidade[0]
-          : "",
-        endereco: req.body.endereco ? req.body.endereco[0] : "",
-        StatusId: req.body.status ? req.body.status[0] : undefined,
-        CargoId: req.body.cargo ? req.body.cargo[0] : undefined,
-        obsStatus: req.body.obsStatus ? req.body.obsStatus[0] : "",
-        UsuarioId: req.usuario.id,
-      };
+      const candidato = req.body;
+
+      delete candidato.createdAt;
+      candidato.dataNascimento = new Date(candidato.dataNascimento);
+      candidato.UsuarioId = req.usuario.id;
 
       if (
         !candidato.nome ||
@@ -121,7 +97,7 @@ module.exports = class CandidatoController {
           UsuarioId: req.usuario.id,
         },
         group: ["Candidato.id", "Usuario.id", "Status.id", "Cargo.id"],
-        order: [["updatedAt", "DESC"]],
+        order: [["createdAt", "DESC"]],
       });
 
       if (candidatos.length > 0) {

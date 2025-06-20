@@ -14,15 +14,19 @@ function formataData(data) {
 }
 
 function formataDataDDMMAAAA(data) {
-  return data
-    ? new Intl.DateTimeFormat("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      })
-        .format(data)
-        .replace(",", "")
-    : null;
+  if (data) {
+    const novaData = new Date(data);
+    novaData.setDate(novaData.getDate() + 1);
+    return new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })
+      .format(novaData)
+      .replace(",", "");
+  }
+
+  return null;
 }
 
 module.exports = { formataData, formataDataDDMMAAAA };
