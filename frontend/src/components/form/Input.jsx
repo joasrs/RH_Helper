@@ -6,9 +6,10 @@ function Input({tipo, name, descricao, valor, onChange, required = true, desabil
     return (
         <div className={`${styles.form_control} ${styles[`tamanho_coluna_${colunaInicio}_${colunaFim}`]}`}>
             <div className="form-floating">
-                {required ?  
-                    <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor || ''} placeholder="placeholder" onChange={onChange} required/> :
-                    <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor || ''} placeholder="placeholder" onChange={onChange}/> }
+                { required ?  
+                    ( valor ? <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange} required/> : <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange} required/>) :
+                    ( valor ? <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange}/> : <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange}/>)
+                }
                 <label>{descricao}</label>
             </div>
         </div>
