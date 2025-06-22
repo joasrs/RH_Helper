@@ -2,7 +2,8 @@ const Candidato = require("../models/candidatoModel");
 const Cargo = require("../models/cargoModel");
 const Status = require("../models/statusModel");
 const Usuario = require("../models/usuarioModel");
-
+const path = require("path");
+const fs = require("fs");
 module.exports = class CandidatoController {
   static async adicionarCandidato(req, res) {
     try {
@@ -11,6 +12,7 @@ module.exports = class CandidatoController {
       delete candidato.createdAt;
       candidato.dataNascimento = new Date(candidato.dataNascimento);
       candidato.UsuarioId = req.usuario.id;
+      candidato.curriculo = req.file?.filename ?? "";
 
       if (
         !candidato.nome ||
@@ -39,6 +41,27 @@ module.exports = class CandidatoController {
       });
     } catch (error) {
       console.log(`Erro ao adicionar o candidato: ${error}`);
+      res.status(500).json({ message: error });
+    }
+  }
+
+  static buscarCurriculo(req, res) {
+    try {
+      const caminhoArquivo = path.join(
+        process.cwd(),
+        "resources",
+        "curriculos",
+        req.params.nomeArquivo
+      );
+
+      if (!fs.existsSync(caminhoArquivo)) {
+        return res.status(404).send("Arquivo não encontrado");
+      }
+
+      res.setHeader("Content-Type", "application/pdf");
+      res.sendFile(caminhoArquivo);
+    } catch (error) {
+      console.log("erro ao buscar o curriculo do candidato: " + error);
       res.status(500).json({ message: error });
     }
   }

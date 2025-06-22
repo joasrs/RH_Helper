@@ -40,10 +40,6 @@ const Candidato = conexao.define("Candidato", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  status: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
   obsStatus: {
     type: DataTypes.TEXT,
     allowNull: true,
