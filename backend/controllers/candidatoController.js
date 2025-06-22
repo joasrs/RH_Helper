@@ -4,15 +4,28 @@ const Status = require("../models/statusModel");
 const Usuario = require("../models/usuarioModel");
 const path = require("path");
 const fs = require("fs");
+
+const path_arquivo = (nomeArquivo) => {
+  const path_formatado = path.join(
+    process.cwd(),
+    "resources",
+    "curriculos",
+    nomeArquivo ?? "arquivo_inexistente"
+  );
+
+  return fs.existsSync(path_formatado) ? path_formatado : false;
+};
 module.exports = class CandidatoController {
   static async adicionarCandidato(req, res) {
     try {
       const candidato = req.body;
 
       delete candidato.createdAt;
-      candidato.dataNascimento = new Date(candidato.dataNascimento);
       candidato.UsuarioId = req.usuario.id;
-      candidato.curriculo = req.file?.filename ?? "";
+
+      if (req.file?.filename) {
+        candidato.curriculo = req.file.filename;
+      }
 
       if (
         !candidato.nome ||
@@ -47,19 +60,14 @@ module.exports = class CandidatoController {
 
   static buscarCurriculo(req, res) {
     try {
-      const caminhoArquivo = path.join(
-        process.cwd(),
-        "resources",
-        "curriculos",
-        req.params.nomeArquivo
-      );
+      const pathArquivo = path_arquivo(req.params.nomeArquivo);
 
-      if (!fs.existsSync(caminhoArquivo)) {
+      if (!pathArquivo) {
         return res.status(404).send("Arquivo não encontrado");
       }
 
       res.setHeader("Content-Type", "application/pdf");
-      res.sendFile(caminhoArquivo);
+      res.sendFile(pathArquivo);
     } catch (error) {
       console.log("erro ao buscar o curriculo do candidato: " + error);
       res.status(500).json({ message: error });
@@ -75,6 +83,16 @@ module.exports = class CandidatoController {
 
         if (!req.usuario.admin) {
           where.UsuarioId = req.usuario.id;
+        }
+
+        //remove o curriculo vinculado ao candidato caso tenha
+        const candidato = await Candidato.findOne({
+          attributes: ["curriculo"],
+          where,
+        });
+        const pathArquivo = path_arquivo(candidato.curriculo);
+        if (pathArquivo) {
+          fs.unlinkSync(pathArquivo);
         }
 
         const retorno = await Candidato.destroy({ where });
