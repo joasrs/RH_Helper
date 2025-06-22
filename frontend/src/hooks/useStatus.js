@@ -46,7 +46,7 @@ export default function useStatus() {
   const adicionarStatus = useCallback(
     (status) => {
       return api.post("status/add", status).then((response) => {
-        setFlashMessage("Status cadastrado com sucesso!", "success");
+        setFlashMessage(response.data.message, "success");
         navigate("/status");
       });
     },
@@ -60,7 +60,7 @@ export default function useStatus() {
           response.data.message,
           response.status === 200 ? "success" : "error"
         );
-
+        navigate("/status");
         return response.status;
       });
     },

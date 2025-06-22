@@ -46,7 +46,7 @@ export default function useCargo() {
   const adicionarCargo = useCallback(
     (cargo) => {
       return api.post("cargo/add", cargo).then((response) => {
-        setFlashMessage("Cargo cadastrado com sucesso!", "success");
+        setFlashMessage(response.data.message, "success");
         navigate("/cargo");
       });
     },
