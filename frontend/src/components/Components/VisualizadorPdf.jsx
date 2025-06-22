@@ -18,8 +18,8 @@ export default function VisuzalizadorPdf({arquivo}){
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className={`modal-body`}>
-                    { arquivo &&
-                        <Document className={styles.body_modal_pdf} file={arquivo} onLoadSuccess={onDocumentLoadSuccess}>
+                    { 
+                        <Document className={styles.body_modal_pdf} file={arquivo} noData={"O currículo não foi carregado ou não foi encontrado."} loading="Carregando currículo..." error="Não foi possível carregar o currículo" onLoadSuccess={onDocumentLoadSuccess}>
                             {Array.from(new Array(numPages), (el, index) => (
                                 <Page className={styles.pagina} key={`page_${index + 1}`} pageNumber={index + 1} renderAnnotationLayer={false} renderTextLayer={false}/>
                             ))}
