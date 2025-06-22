@@ -8,7 +8,7 @@ export default function CardCandidato({ candidato }) {
         <>
             <div className={styles.card} onClick={() => navigate('/cadastro-candidato', { state: candidato })}>
                 <div className={styles.header}>
-                    <h5>{candidato.nome}</h5>                 
+                    <h3>{candidato.nome}</h3>                 
                 </div>
 
                 <div className={styles.body}>

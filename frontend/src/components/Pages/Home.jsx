@@ -28,7 +28,6 @@ export default  function Home() {
          
     return (
         <div className={styles.div_home}>
-            <h2 style={{textAlign: "center"}}>Candidatos</h2>
             {
                 candidatos && candidatos.map((e, index) => (
                     <CardCandidato key={index} candidato={e}/>              
