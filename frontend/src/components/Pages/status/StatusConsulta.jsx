@@ -44,7 +44,7 @@ export default function StatusConsulta() {
                             <td>{e.descricao}</td>
                             <td>{e.obs}</td>
                             <td>{e.createdAt}</td>
-                            <td>{e.cor}</td>
+                            <td><input className={styles.input_color} disabled type="color" value={e.cor}/></td>
                             </tr>
                         ))
                     }
