@@ -28,6 +28,21 @@ export default function useCandidato() {
     }
   }, []);
 
+  const buscarCurriculo = useCallback(async (nomeArquivo) => {
+    try {
+      return await api
+        .get("candidato/curriculo/" + nomeArquivo, { responseType: "blob" })
+        .then((response) => {
+          return URL.createObjectURL(response.data);
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }, []);
+
   const adicionarCandidato = useCallback(
     (candidato) => {
       return api.post("candidato/add", candidato).then((response) => {
@@ -56,5 +71,10 @@ export default function useCandidato() {
     [setFlashMessage]
   );
 
-  return { consultarCandidatos, adicionarCandidato, removerCandidato };
+  return {
+    consultarCandidatos,
+    adicionarCandidato,
+    removerCandidato,
+    buscarCurriculo,
+  };
 }
