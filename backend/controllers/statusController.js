@@ -2,16 +2,6 @@ const Status = require("../models/statusModel");
 const Usuario = require("../models/usuarioModel");
 
 module.exports = class StatusController {
-  // static async getStatuss(req, res) {
-  //   const statuss = await buscarTodasStatuss(
-  //     req.usuario ? req.usuario.id : 0
-  //   );
-
-  //   res.status(200).json({
-  //     message: `${statuss.length} statuss encontradas...`,
-  //     statuss,
-  //   });
-  // }
   static async buscarCombo(req, res) {
     try {
       let todosStatus = await Status.findAll({
@@ -38,15 +28,11 @@ module.exports = class StatusController {
 
   static async adicionarStatus(req, res) {
     try {
-      const status = {
-        descricao: req.body.descricao ? req.body.descricao[0] : "",
-        obs: req.body.obs ? req.body.obs[0] : "",
-        cor: req.body.cor ? req.body.cor[0] : "",
-        ativo: req.body.ativo ? req.body.ativo[0] : Date.now(),
-        UsuarioId: req.usuario.id,
-      };
+      const status = req.body;
+      status.ativo = Date.now();
+      status.UsuarioId = req.usuario.id;
+      delete status.createdAt;
 
-      console.log(status);
       if (!status.descricao) {
         res.status(422).json({
           message: "Necessário informar todos os campos obrigatórios",
@@ -54,9 +40,13 @@ module.exports = class StatusController {
         return;
       }
 
-      const statusCadastrado = await Status.create(status);
+      const statusCadastrado =
+        status.id > 0
+          ? await Status.update(status, { where: { id: status.id } })
+          : await Status.create(status);
+
       res.status(201).json({
-        message: "Status cadastrado com sucesso!",
+        message: `Status ${status.id ? "alterado" : "incluído"} com sucesso!`,
         status: statusCadastrado,
       });
     } catch (error) {

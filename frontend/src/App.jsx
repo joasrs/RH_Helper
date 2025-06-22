@@ -13,6 +13,12 @@ import PaginaNaoEncontrada from "./components/Pages/PaginaNaoEncontrada";
 import CandidatoCadastro from "./components/Pages/candidato/CandidatoCadastro";
 import StatusConsulta from "./components/Pages/status/StatusConsulta";
 import CargoConsulta from "./components/Pages/cargo/CargoConsulta";
+import { pdfjs } from 'react-pdf';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
 function AppComposicao(){
   const location = useLocation();

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function StatusConsulta() {      
     const [status, setStatus] = useState([]);
     const [carregando, setCarregando] = useState(true);
-    const { consultarStatus, removerStatus } = useStatus();
+    const { consultarStatus } = useStatus();
     const { setErroPadrao } = useErroPadrao();
     const navigate = useNavigate();
 
@@ -24,14 +24,6 @@ export default function StatusConsulta() {
             navigate("/login");
         }
     }, [consultarStatus, setErroPadrao]);
-
-    function handleClickRemoverStatus(idStatus){
-        removerStatus(idStatus).then((status) => {
-            if(status && status === 200){
-                setStatus(status.filter( e => e.id != idStatus ));
-            }
-        }).catch((error) => setErroPadrao(error));
-    }
             
     return (
         <div className={styles.div_home}>
@@ -43,18 +35,16 @@ export default function StatusConsulta() {
                     <th scope="col">Obs</th>
                     <th scope="col">Data de Cadastro</th>
                     <th scope="col">Cor</th>
-                    <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         status && status.map((e, index) => (
-                            <tr key={index}>
+                            <tr key={index} onClick={() => navigate('/cadastro-status', { state: e })}>
                             <td>{e.descricao}</td>
                             <td>{e.obs}</td>
                             <td>{e.createdAt}</td>
-                            <td>{e.cor}</td>
-                            <td><button className={`btn btn-danger bi bi-x-circle ${styles.botao_excluir}`} onClick={() => handleClickRemoverStatus(e.id)}></button></td>
+                            <td><input className={styles.input_color} disabled type="color" value={e.cor}/></td>
                             </tr>
                         ))
                     }

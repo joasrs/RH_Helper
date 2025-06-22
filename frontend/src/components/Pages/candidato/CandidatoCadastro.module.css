@@ -28,3 +28,24 @@
     gap: 10px 20px;
     align-content: start;
 }
+
+.btn_visualizar_pdf{
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.btn_visualizar_pdf:hover{
+    background-color: #dcdcdc;
+}
+
+.btn_visualizar_pdf:active{
+    background-color: #aaaaaa;
+}
+
+.group_icones_arquivo{
+    display: inline;
+    align-content: center;
+}
