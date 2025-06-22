@@ -60,7 +60,7 @@ export default function useCargo() {
           response.data.message,
           response.status === 200 ? "success" : "error"
         );
-
+        navigate("/cargo");
         return response.status;
       });
     },

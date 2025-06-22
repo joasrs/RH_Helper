@@ -1,10 +1,7 @@
 import styles from './CardCandidato.module.css'
-import Dialog from '../Layout/Dialog/Dialog'
-import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
 export default function CardCandidato({ candidato }) {
-    const [abrirDialog, setAbrirDialog] = useState(false);
     const navigate = useNavigate();
 
     return (

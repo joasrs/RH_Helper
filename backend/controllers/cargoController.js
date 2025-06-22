@@ -2,17 +2,6 @@ const Cargo = require("../models/cargoModel");
 const Usuario = require("../models/usuarioModel");
 
 module.exports = class CargoController {
-  //   static async getCargo(req, res) {
-  //     const candidatos = await buscarTodosCargos(
-  //       req.usuario ? req.usuario.id : 0
-  //     );
-
-  //     res.status(200).json({
-  //       message: `${candidatos.length} candidatos encontradas...`,
-  //       candidatos,
-  //     });
-  //   }
-
   static async buscarCombo(req, res) {
     try {
       let cargos = await Cargo.findAll({
@@ -39,13 +28,10 @@ module.exports = class CargoController {
 
   static async adicionarCargo(req, res) {
     try {
-      const cargo = {
-        descricao: req.body.descricao ? req.body.descricao[0] : "",
-        mediaSalarial: req.body.mediaSalarial ? req.body.mediaSalarial[0] : 0,
-        vagasAbertas: req.body.vagasAbertas ? req.body.vagasAbertas[0] : "",
-        ativo: req.body.ativo ? req.body.ativo[0] : Date.now(),
-        UsuarioId: req.usuario.id,
-      };
+      const cargo = req.body;
+      cargo.ativo = Date.now();
+      cargo.UsuarioId = req.usuario.id;
+      delete cargo.createdAt;
 
       if (!cargo.descricao || !cargo.mediaSalarial) {
         res.status(422).json({
@@ -54,9 +40,13 @@ module.exports = class CargoController {
         return;
       }
 
-      const cargoCadastrado = await Cargo.create(cargo);
+      const cargoCadastrado =
+        cargo.id > 0
+          ? await Cargo.update(cargo, { where: { id: cargo.id } })
+          : await Cargo.create(cargo);
+
       res.status(201).json({
-        message: "Cargo cadastrada com sucesso!",
+        message: `Cargo ${cargo.id ? "alterado" : "incluído"} com sucesso!`,
         cargo: cargoCadastrado,
       });
     } catch (error) {
