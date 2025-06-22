@@ -24,18 +24,16 @@ export default function CardCandidato({ candidato }) {
                             <span className={styles.titulo}>E-mail:</span>
                             <span className={styles.conteudo}>{candidato.email}</span>
                         </div>
-                    </div>
-                    <div className={styles.row}>
                         <div className={styles.campo}>
                             <span className={styles.titulo}>CPF:</span>
                             <span className={styles.conteudo}>{candidato.cpf}</span>
                         </div>
+                    </div>
+                    <div className={styles.row}>
                         <div className={styles.campo}>
                             <span className={styles.titulo}>Nascimento:</span>
                             <span className={styles.conteudo}>{candidato.dataNascimentoFormatada}</span>
                         </div>
-                    </div>
-                    <div className={styles.row}>
                         <div className={styles.campo}>
                             <span className={styles.titulo}>Endereço:</span>
                             <span className={styles.conteudo}>{candidato.endereco}</span>
@@ -53,6 +51,9 @@ export default function CardCandidato({ candidato }) {
                         <div className={styles.campo}>
                             <span className={styles.titulo}>Obs. Status:</span>
                             <span className={styles.conteudo}>{candidato.obsStatus}</span>
+                        </div>
+                        <div className={styles.campo}>
+                            <span className={styles.titulo}>Currículo Anexado: <i className={`fs-4 bi bi-${candidato.curriculo ? "check" : "x"}`} style={{color: candidato.curriculo ? 'green' : '#df1818'}}></i></span>
                         </div>
                     </div>
                 </div>
