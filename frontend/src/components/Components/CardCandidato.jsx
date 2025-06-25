@@ -1,7 +1,7 @@
 import styles from './CardCandidato.module.css'
 import { useNavigate } from "react-router-dom";
 
-export default function CardCandidato({ candidato }) {
+export default function CardCandidato({ candidato, onCLickAbrirModal }) {
     const navigate = useNavigate();
 
     return (
@@ -65,6 +65,7 @@ export default function CardCandidato({ candidato }) {
                             {candidato.Status.descricao}
                         </div>
                     )}
+                    <button data-candidato={candidato.id} data-bs-toggle="modal" data-bs-target="#modalTrocarStatus" className={styles.btn_trocar_status} type='button' onClick={onCLickAbrirModal}><i data-candidato={candidato.id} className="bi bi-arrow-repeat fs-4"></i></button> 
                 </div>
             </div>
         </>

@@ -137,3 +137,9 @@
 .vermelho {
     background-color: #c72222;
 }
+
+.desabilitado:disabled {
+  background-color: #f7f7f7 !important;
+  color: #6f6f6f !important;
+  opacity: 0.6 !important;
+}

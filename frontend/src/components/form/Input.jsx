@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react';
 import styles from './Input.module.css';
 import useErroPadrao from '../../hooks/useErroPadrao';
+import { useMask } from '@react-input/mask';
 
-function Input({tipo, name, descricao, valor, onChange, required = true, desabilitado = false, colunaInicio, colunaFim, style}){
+function Input({tipo, name, descricao, valor, onChange, required = true, desabilitado = false, colunaInicio, colunaFim, style, mascara}){
+    let mask = useMask({
+        mask: mascara,
+        replacement: { _: /\d/ },   
+    });
+    mask = mascara ? mask : undefined;
     return (
         <div style={style} className={`${styles.form_control} ${styles[`tamanho_coluna_${colunaInicio}_${colunaFim}`]}`}>
             <div className="form-floating">
                 { required ?  
-                    ( valor ? <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange} required/> : <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange} required/>) :
-                    ( valor ? <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange}/> : <input disabled={desabilitado} className="form-control" type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange}/>)
+                    ( valor ? <input ref={mask} disabled={desabilitado} className={`form-control ${styles.desabilitado}`} type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange} required/> : <input ref={mask} disabled={desabilitado} className={`form-control ${styles.desabilitado}`} type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange} required/>) :
+                    ( valor ? <input ref={mask} disabled={desabilitado} className={`form-control ${styles.desabilitado}`} type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange}/> : <input ref={mask} disabled={desabilitado} className={`form-control ${styles.desabilitado}`} type={tipo} name={name} id={name} value={valor} placeholder="placeholder" onChange={onChange}/>)
                 }
                 <label>{descricao}</label>
             </div>
@@ -36,7 +42,7 @@ function Select({name, descricao, useApi, onChange, desabilitado = false, valor}
     }
 
     return (
-        <select disabled={desabilitado} name={name} className="form-select" onChange={onChangeValor} style={{height: 58}} value={valorSelecionado}>
+        <select disabled={desabilitado} name={name} className={`form-select ${styles.desabilitado}`} onChange={onChangeValor} style={{height: 58}} value={valorSelecionado}>
             <option value="" defaultValue hidden>Selecionar {descricao}</option>
             {itensCombo && itensCombo.map(i=> <option key={i.id} value={i.id}>{i.descricao}</option>)}
         </select>
@@ -77,18 +83,18 @@ function InputButton({name, descricao, submmit = false, classeIcone, onClick, lo
     )
 }
 
-function InputTextArea({name, descricao, valor, onChange}){
+function InputTextArea({name, descricao, valor, onChange, desabilitado = false}){
     return (
         <div className={`input-group ${styles.form_control}`}>
             <div className="form-floating">
-                <textarea className={`form-control ${styles.text_area}`} placeholder={descricao} id={name} name={name} value={valor} onChange={onChange} required></textarea>
+                <textarea disabled={desabilitado} className={`form-control ${styles.text_area} ${styles.desabilitado}`} placeholder={descricao} id={name} name={name} value={valor} onChange={onChange} required></textarea>
                 <label>{descricao}</label>
             </div>      
         </div>
     );
 }
 
-function InputPassword({name, descricao, valor, onChange}){
+function InputPassword({name, descricao, valor, onChange, desabilitado = false}){
     const [tipoImg, setTipoImg] = useState({ tipo: "password", img: ""});
 
     function handleCLickMostrarSenha(){
@@ -99,7 +105,7 @@ function InputPassword({name, descricao, valor, onChange}){
         <div className={styles.div_senha}>
             <div className={styles.form_control_senha}>
                 <div className="form-floating">
-                    <input type={tipoImg.tipo} className={`form-control ${styles.input_senha}`} name={name} value={valor} placeholder="padrao" onChange={onChange} required/>
+                    <input disabled={desabilitado} type={tipoImg.tipo} className={`form-control ${styles.desabilitado} ${styles.input_senha}`} name={name} value={valor} placeholder="padrao" onChange={onChange} required/>
                     <label>{descricao}</label>
                 </div>
             </div>

@@ -7,7 +7,7 @@ import useCargo from '../../../hooks/useCargo';
 import useErroPadrao from '../../../hooks/useErroPadrao';
 import { useLocation } from 'react-router-dom'
 import BarraBotoes from '../../form/BarraBotoes';
-import VisuzalizadorPdf from '../../Components/VisualizadorPdf';
+import VisuzalizadorPdf from '../../Modal/VisualizadorPdf';
 import { isBlob } from 'react-pdf/dist/cjs/shared/utils.js';
 
 export default function CandidatoCadastro(){
@@ -68,9 +68,9 @@ export default function CandidatoCadastro(){
                 <div className={styles.form_grid}>
                     <Input desabilitado={inputHabilitado} tipo="text" name="nome" descricao="Nome" onChange={handleChange} valor={candidato.nome} colunaInicio={1} colunaFim={2}/>
                     <Input desabilitado={inputHabilitado} tipo="date" name="dataNascimento" descricao="Data Nascimento" onChange={handleChange} valor={candidato.dataNascimento}/>
-                    <Input desabilitado={inputHabilitado} tipo="text" name="telefone" descricao="Telefone" onChange={handleChange} valor={candidato.telefone} />
+                    <Input mascara="(__) _ ____-____" desabilitado={inputHabilitado} tipo="text" name="telefone" descricao="Telefone" onChange={handleChange} valor={candidato.telefone} />
                     <Input desabilitado={inputHabilitado} tipo="text" name="email" descricao="E-mail" onChange={handleChange} valor={candidato.email}  colunaInicio={1} colunaFim={2}/>
-                    <Input desabilitado={inputHabilitado} tipo="text" name="cpf" descricao="CPF" onChange={handleChange} valor={candidato.cpf} />
+                    <Input mascara="___.___.___-__" desabilitado={inputHabilitado} tipo="text" name="cpf" descricao="CPF" onChange={handleChange} valor={candidato.cpf} />
                     <Input desabilitado={inputHabilitado} tipo="text" name="cidadeNaturalidade" descricao="Cidade Naturalidade" onChange={handleChange} valor={candidato.cidadeNaturalidade} />
                     <Input desabilitado={inputHabilitado} tipo="tel" name="endereco" descricao="Endereço" onChange={handleChange} valor={candidato.endereco}  colunaInicio={1} colunaFim={3}/>
                     <Select desabilitado={inputHabilitado} name="CargoId" descricao="Cargo" useApi={useCargo} onChange={handleChange} valor={candidato.Cargo?.id}/>

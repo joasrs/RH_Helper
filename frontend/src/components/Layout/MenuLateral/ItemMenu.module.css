@@ -8,10 +8,12 @@
 
 .link:hover {
     background-color: #ededed;
+    border-radius: 8px;
 }
 
 .item_lista{
     list-style: none;
+    padding: 5px;
 }
 
 a {

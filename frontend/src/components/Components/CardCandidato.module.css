@@ -87,3 +87,19 @@
     min-width: 80px;
     text-align: center;
 }
+
+.btn_trocar_status{
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.btn_trocar_status:hover{
+    background-color: #dcdcdc;
+}
+
+.btn_trocar_status:active{
+    background-color: #aaaaaa;
+}
