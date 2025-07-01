@@ -4,11 +4,33 @@ import { useNavigate } from "react-router-dom";
 export default function CardCandidato({ candidato, onCLickAbrirModal }) {
     const navigate = useNavigate();
 
+    function abrirModalAlterarStatus(e){
+        e.stopPropagation();
+    }   
+
     return (
         <>
             <div className={styles.card} onClick={() => navigate('/cadastro-candidato', { state: candidato })}>
                 <div className={styles.header}>
-                    <h3>{candidato.nome}</h3>                 
+                    <h3>{candidato.nome}</h3> 
+                    { candidato.Status && 
+
+                        <div className="dropdown">
+                            <div className={`${styles.div_status_header}`} onClick={e=> e.stopPropagation()} data-bs-toggle="dropdown" aria-expanded="false" data-toggle="dropdown">
+                                <i style={{alignContent: 'center', marginRight: '15px'}} className="bi bi-chevron-down"></i>
+                                <h5 className={styles.statusBadge} 
+                                    style={{ backgroundColor: candidato.Status.cor }}> { candidato.Status.descricao } </h5> 
+                            </div> 
+                            <ul className={`dropdown-menu ${styles.itens_dropdown}`}>
+                                <li data-candidato={candidato.id} data-bs-toggle="modal" data-bs-target="#modalTrocarStatus" className={`${styles.logout} ${styles.li_dropdown}`} onClick={abrirModalAlterarStatus}>
+                                    <a className={`${styles.logout} ${styles.a_dropdown}`} href="#">
+                                        <i className={`bi bi-arrow-repeat ${styles.item_dropdown} ${styles.logout}`}></i>
+                                        Alterar Status
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                 </div>
 
                 <div className={styles.body}>
@@ -53,19 +75,6 @@ export default function CardCandidato({ candidato, onCLickAbrirModal }) {
                             <span className={styles.titulo}>Currículo Anexado: <i className={`fs-4 bi bi-${candidato.curriculo ? "check" : "x"}`} style={{color: candidato.curriculo ? 'green' : '#df1818'}}></i></span>
                         </div>
                     </div>
-                </div>
-
-                <div className={styles.footer}>
-                    <span>Status:</span>
-                    {candidato.Status && (
-                        <div 
-                            className={styles.statusBadge} 
-                            style={{ backgroundColor: candidato.Status.cor }}
-                        >
-                            {candidato.Status.descricao}
-                        </div>
-                    )}
-                    <button data-candidato={candidato.id} data-bs-toggle="modal" data-bs-target="#modalTrocarStatus" className={styles.btn_trocar_status} type='button' onClick={onCLickAbrirModal}><i data-candidato={candidato.id} className="bi bi-arrow-repeat fs-4"></i></button> 
                 </div>
             </div>
         </>

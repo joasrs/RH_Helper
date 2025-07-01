@@ -23,7 +23,7 @@
 .header h5 {
     margin: 0;
     font-size: 1.25rem;
-    color: #333;
+    /* color: #333; */
 }
 
 .botaoExcluir {
@@ -102,4 +102,45 @@
 
 .btn_trocar_status:active{
     background-color: #aaaaaa;
+}
+
+.div_status_header{
+    display: flex;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.div_status_header:hover {
+    cursor: pointer;
+    background-color: #e6e6e6;
+}
+
+.div_status_header:active {
+    cursor: pointer;
+    background-color: #dadada;
+}
+
+.itens_dropdown{
+    padding: 0px;
+}
+
+.item_dropdown {
+    margin-right: 8px;
+}
+
+.a_dropdown{
+  padding: 6px 16px;
+  width: 100%;
+  display: block;
+  color: black !important;
+}
+
+.a_dropdown:hover {
+    background-color: #f6f6f6;
+    border-radius: 0.375em;
+}
+
+.a_dropdown:active {
+    background-color: #ececec;
+    border-radius: 0.375em;
 }
