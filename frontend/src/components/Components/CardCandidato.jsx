@@ -1,11 +1,15 @@
 import styles from './CardCandidato.module.css'
 import { useNavigate } from "react-router-dom";
+import TrocarStatus from '../Modal/TrocarStatus';
+import { useState } from 'react';
 
-export default function CardCandidato({ candidato, onCLickAbrirModal }) {
+export default function CardCandidato({ candidato }) {
     const navigate = useNavigate();
+    const [idCandidatoTrocarStatus, SetIdCandidatoTrocarStatus] = useState();
 
     function abrirModalAlterarStatus(e){
         e.stopPropagation();
+        SetIdCandidatoTrocarStatus(e.target.attributes["data-candidato"].value)
     }   
 
     return (
@@ -18,12 +22,12 @@ export default function CardCandidato({ candidato, onCLickAbrirModal }) {
                         <div className="dropdown">
                             <div className={`${styles.div_status_header}`} onClick={e=> e.stopPropagation()} data-bs-toggle="dropdown" aria-expanded="false" data-toggle="dropdown">
                                 <i style={{alignContent: 'center', marginRight: '15px'}} className="bi bi-chevron-down"></i>
-                                <h5 className={styles.statusBadge} 
-                                    style={{ backgroundColor: candidato.Status.cor }}> { candidato.Status.descricao } </h5> 
+                                <h4 className={styles.statusBadge} 
+                                    style={{ backgroundColor: candidato.Status.cor }}> { candidato.Status.descricao } </h4> 
                             </div> 
                             <ul className={`dropdown-menu ${styles.itens_dropdown}`}>
-                                <li data-candidato={candidato.id} data-bs-toggle="modal" data-bs-target="#modalTrocarStatus" className={`${styles.logout} ${styles.li_dropdown}`} onClick={abrirModalAlterarStatus}>
-                                    <a className={`${styles.logout} ${styles.a_dropdown}`} href="#">
+                                <li data-bs-toggle="modal" data-bs-target="#modalTrocarStatus" className={`${styles.logout} ${styles.li_dropdown}`} onClick={abrirModalAlterarStatus}>
+                                    <a data-candidato={candidato.id} className={`${styles.a_dropdown}`} href="#">
                                         <i className={`bi bi-arrow-repeat ${styles.item_dropdown} ${styles.logout}`}></i>
                                         Alterar Status
                                     </a>
@@ -77,6 +81,7 @@ export default function CardCandidato({ candidato, onCLickAbrirModal }) {
                     </div>
                 </div>
             </div>
+            <TrocarStatus candidato={candidato}/>
         </>
     );
 }

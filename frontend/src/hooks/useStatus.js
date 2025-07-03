@@ -67,10 +67,26 @@ export default function useStatus() {
     [setFlashMessage]
   );
 
+  const alterarStatusCandidato = useCallback(
+    (novoStatus, idCandidato) => {
+      return api
+        .put("status/alterar", { novoStatus, idCandidato })
+        .then((response) => {
+          setFlashMessage(
+            response.data.message,
+            response.status === 200 ? "success" : "error"
+          );
+          return response.status;
+        });
+    },
+    [setFlashMessage]
+  );
+
   return {
     consultarStatus,
     adicionarStatus,
     removerStatus,
     buscarItensCombo,
+    alterarStatusCandidato,
   };
 }

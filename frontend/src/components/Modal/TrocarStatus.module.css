@@ -1,0 +1,10 @@
+.div_troca_status{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 5px 30px 5px;
+}
+
+.div_modal{
+    width: 100% !important;
+    max-width: 600px !important;
+}

@@ -4,12 +4,10 @@ import styles from "./Home.module.css"
 import useCandidato from "../../hooks/useCandidato";
 import { useNavigate } from "react-router-dom";
 import CardCandidato from "../Components/CardCandidato";
-import TrocarStatus from "../Modal/TrocarStatus";
 
 export default  function Home() {
     const [candidatos, setCandidatos] = useState([]);
     const [carregando, setCarregando] = useState(true);
-    const [idCandidatoTrocarStatus, SetIdCandidatoTrocarStatus] = useState();
     const { consultarCandidatos } = useCandidato();
     const { setErroPadrao } = useErroPadrao();
     const navigate = useNavigate();
@@ -26,25 +24,17 @@ export default  function Home() {
         else{
             navigate("/login");
         }
-    }, [consultarCandidatos, setErroPadrao]);
-         
-
-    function onClickTrocarStatus(e) {
-        e.stopPropagation();
-        SetIdCandidatoTrocarStatus(e.target.attributes["data-candidato"].value)
-        //SetIdCandidatoTrocarStatus();
-    }
+    }, [consultarCandidatos, setErroPadrao]);  
 
     return (
         <>
             <div className={styles.div_home}>
                 {
                     candidatos && candidatos.map((e, index) => (
-                        <CardCandidato key={index} candidato={e} onCLickAbrirModal={onClickTrocarStatus}/>              
+                        <CardCandidato key={index} candidato={e}/>              
                     ))
                 }
             </div>
-            <TrocarStatus idCandidato={idCandidatoTrocarStatus}/>
         </>
     )
 }

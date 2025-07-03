@@ -22,7 +22,7 @@ function Input({tipo, name, descricao, valor, onChange, required = true, desabil
     )
 }   
 
-function Select({name, descricao, useApi, onChange, desabilitado = false, valor}){
+function Select({name, descricao, useApi, onChange, desabilitado = false, valor, required = false}){
     const { buscarItensCombo } = useApi();
     const [itensCombo, setItensCombo] = useState([]);
     const [valorSelecionado, setValorSelecionado] = useState(valor);
@@ -42,10 +42,15 @@ function Select({name, descricao, useApi, onChange, desabilitado = false, valor}
     }
 
     return (
-        <select disabled={desabilitado} name={name} className={`form-select ${styles.desabilitado}`} onChange={onChangeValor} style={{height: 58}} value={valorSelecionado}>
-            <option value="" defaultValue hidden>Selecionar {descricao}</option>
-            {itensCombo && itensCombo.map(i=> <option key={i.id} value={i.id}>{i.descricao}</option>)}
-        </select>
+            required ? 
+            <select required disabled={desabilitado} name={name} className={`form-select ${styles.desabilitado}`} onChange={onChangeValor} style={{height: 58}} value={valorSelecionado}>
+                <option value="" defaultValue hidden>Selecionar {descricao}</option>
+                {itensCombo && itensCombo.map(i=> <option key={i.id} value={i.id}>{i.descricao}</option>)}
+            </select> :
+            <select disabled={desabilitado} name={name} className={`form-select ${styles.desabilitado}`} onChange={onChangeValor} style={{height: 58}} value={valorSelecionado}>
+                <option value="" defaultValue hidden>Selecionar {descricao}</option>
+                {itensCombo && itensCombo.map(i=> <option key={i.id} value={i.id}>{i.descricao}</option>)}
+            </select> 
     );
 }
 
