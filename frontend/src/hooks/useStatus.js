@@ -68,9 +68,9 @@ export default function useStatus() {
   );
 
   const alterarStatusCandidato = useCallback(
-    (novoStatus, idCandidato) => {
+    (idNovoStatus, idCandidato) => {
       return api
-        .put("status/alterar", { novoStatus, idCandidato })
+        .put("status/alterar", { idNovoStatus, idCandidato })
         .then((response) => {
           setFlashMessage(
             response.data.message,

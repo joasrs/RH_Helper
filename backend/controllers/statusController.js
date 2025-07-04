@@ -1,11 +1,39 @@
 const Status = require("../models/statusModel");
+const Candidato = require("../models/candidatoModel");
 const Usuario = require("../models/usuarioModel");
 
 module.exports = class StatusController {
+  static async alterarStatus(req, res) {
+    try {
+      const { idNovoStatus, idCandidato } = req.body;
+
+      if (idNovoStatus && idCandidato) {
+        const resultado = await Candidato.update(
+          { StatusId: parseInt(idNovoStatus) },
+          {
+            where: { id: idCandidato },
+          }
+        );
+
+        if (resultado) {
+          return res.status(200).json({
+            message: `Status do candidato alterado com sucesso!`,
+          });
+        }
+      }
+      res.status(422).json({
+        message: `Não foi possível alterar o status do candidato`,
+      });
+    } catch (error) {
+      console.log("erro ao alterar o status: " + error);
+      res.status(500).json({ message: error });
+    }
+  }
+
   static async buscarCombo(req, res) {
     try {
       let todosStatus = await Status.findAll({
-        attributes: ["id", "descricao"],
+        attributes: ["id", "descricao", "cor"],
         where: {
           UsuarioId: req.usuario.id,
         },

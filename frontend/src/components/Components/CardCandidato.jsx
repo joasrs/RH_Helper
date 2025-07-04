@@ -1,16 +1,40 @@
 import styles from './CardCandidato.module.css'
 import { useNavigate } from "react-router-dom";
 import TrocarStatus from '../Modal/TrocarStatus';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import useStatus from '../../hooks/useStatus';
+import useErroPadrao from '../../hooks/useErroPadrao';
 
 export default function CardCandidato({ candidato }) {
     const navigate = useNavigate();
-    const [idCandidatoTrocarStatus, SetIdCandidatoTrocarStatus] = useState();
+    const { alterarStatusCandidato } = useStatus();
+    const modalRef = useRef(null);
+    const modalInstanceRef = useRef(null);
+    const [corBadgeStatus, setCorBadgeStatus ] = useState(candidato.Status.cor);
+    const [descricaoBadgeStatus, setDescricaoBadgeStatus ] = useState(candidato.Status.descricao);
+    const { setErroPadrao } = useErroPadrao();
 
-    function abrirModalAlterarStatus(e){
+    const abrirModal = (e) => {
         e.stopPropagation();
-        SetIdCandidatoTrocarStatus(e.target.attributes["data-candidato"].value)
-    }   
+        if (modalInstanceRef.current) {
+            modalInstanceRef.current.show();
+        }
+    };
+
+    const fecharModal = () => {
+        if (modalInstanceRef.current) {
+            modalInstanceRef.current.hide();
+        }
+    };
+
+    function onConfirmarAlteracaoStatus(novoStatus, idCandidato){
+        if(novoStatus && idCandidato){
+            alterarStatusCandidato(novoStatus.id, idCandidato).then().catch(error => setErroPadrao(error));
+            setCorBadgeStatus(novoStatus.cor);
+            setDescricaoBadgeStatus(novoStatus.descricao);
+            return;
+        }
+    }
 
     return (
         <>
@@ -23,10 +47,10 @@ export default function CardCandidato({ candidato }) {
                             <div className={`${styles.div_status_header}`} onClick={e=> e.stopPropagation()} data-bs-toggle="dropdown" aria-expanded="false" data-toggle="dropdown">
                                 <i style={{alignContent: 'center', marginRight: '15px'}} className="bi bi-chevron-down"></i>
                                 <h4 className={styles.statusBadge} 
-                                    style={{ backgroundColor: candidato.Status.cor }}> { candidato.Status.descricao } </h4> 
+                                    style={{ backgroundColor: corBadgeStatus }}> { descricaoBadgeStatus } </h4> 
                             </div> 
                             <ul className={`dropdown-menu ${styles.itens_dropdown}`}>
-                                <li data-bs-toggle="modal" data-bs-target="#modalTrocarStatus" className={`${styles.logout} ${styles.li_dropdown}`} onClick={abrirModalAlterarStatus}>
+                                <li onClickCapture={abrirModal} className={`${styles.logout} ${styles.li_dropdown}`}>
                                     <a data-candidato={candidato.id} className={`${styles.a_dropdown}`} href="#">
                                         <i className={`bi bi-arrow-repeat ${styles.item_dropdown} ${styles.logout}`}></i>
                                         Alterar Status
@@ -80,8 +104,8 @@ export default function CardCandidato({ candidato }) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <TrocarStatus candidato={candidato}/>
+            </div>  
+            <TrocarStatus fecharModal={fecharModal} modalRef={modalRef} modalInstanceRef={modalInstanceRef} candidato={candidato} useStatus={useStatus} onConfirmarAlteracaoStatus={onConfirmarAlteracaoStatus}/>
         </>
     );
 }

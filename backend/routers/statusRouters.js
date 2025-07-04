@@ -18,7 +18,11 @@ router.post(
   tokenService.verificarTokenThrow,
   statusController.adicionarStatus
 );
-
+router.put(
+  "/alterar",
+  tokenService.verificarTokenThrow,
+  statusController.alterarStatus
+);
 router.delete(
   "/:idStatus",
   tokenService.verificarTokenThrow,
