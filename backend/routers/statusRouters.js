@@ -13,6 +13,11 @@ router.get(
   tokenService.verificarTokenThrow,
   statusController.buscarStatus
 );
+router.get(
+  "/:idStatus",
+  tokenService.verificarTokenThrow,
+  statusController.buscarUmStatus
+);
 router.post(
   "/add",
   tokenService.verificarTokenThrow,

@@ -13,10 +13,25 @@ export default function useStatus() {
     }
   }, []);
 
+  const buscarUmStatus = useCallback(async (idStatus) => {
+    try {
+      return await api
+        .get("status/" + idStatus)
+        .then((response) => {
+          return response.data.status;
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }, []);
+
   const consultarStatus = useCallback(async () => {
     try {
       return await api
-        .get("/status")
+        .get("status")
         .then((response) => {
           return response.data.status;
         })
@@ -31,7 +46,7 @@ export default function useStatus() {
   const buscarItensCombo = useCallback(async () => {
     try {
       return await api
-        .get("/status/combo")
+        .get("status/combo")
         .then((response) => {
           return response.data.status;
         })
@@ -88,5 +103,6 @@ export default function useStatus() {
     removerStatus,
     buscarItensCombo,
     alterarStatusCandidato,
+    buscarUmStatus,
   };
 }

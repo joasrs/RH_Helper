@@ -29,8 +29,8 @@ function AppComposicao(){
 
   return (
     <UsuarioProvider>
+      <Mensagem/>
       <Navbar />
-      <Mensagem msg="" tipo="" />
       <Container>          
           { mostrarMenuLateral && <MenuLateral/> }
           <Routes>

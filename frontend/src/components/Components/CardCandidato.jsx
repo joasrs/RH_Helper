@@ -7,7 +7,7 @@ import useErroPadrao from '../../hooks/useErroPadrao';
 
 export default function CardCandidato({ candidato }) {
     const navigate = useNavigate();
-    const { alterarStatusCandidato } = useStatus();
+    const { alterarStatusCandidato, buscarUmStatus } = useStatus();
     const modalRef = useRef(null);
     const modalInstanceRef = useRef(null);
     const [corBadgeStatus, setCorBadgeStatus ] = useState(candidato.Status.cor);
@@ -29,9 +29,12 @@ export default function CardCandidato({ candidato }) {
 
     function onConfirmarAlteracaoStatus(novoStatus, idCandidato){
         if(novoStatus && idCandidato){
-            alterarStatusCandidato(novoStatus.id, idCandidato).then().catch(error => setErroPadrao(error));
-            setCorBadgeStatus(novoStatus.cor);
-            setDescricaoBadgeStatus(novoStatus.descricao);
+            candidato.Status.id = novoStatus;
+            alterarStatusCandidato(novoStatus, idCandidato).then().catch(error => setErroPadrao(error));
+            buscarUmStatus(novoStatus).then(status => {
+                setCorBadgeStatus(status.cor);
+                setDescricaoBadgeStatus(status.descricao);
+            }).catch(error => setErroPadrao(error))
             return;
         }
     }
@@ -51,7 +54,7 @@ export default function CardCandidato({ candidato }) {
                             </div> 
                             <ul className={`dropdown-menu ${styles.itens_dropdown}`}>
                                 <li onClickCapture={abrirModal} className={`${styles.logout} ${styles.li_dropdown}`}>
-                                    <a data-candidato={candidato.id} className={`${styles.a_dropdown}`} href="#">
+                                    <a data-candidato={candidato.id} className={`${styles.a_dropdown}`}>
                                         <i className={`bi bi-arrow-repeat ${styles.item_dropdown} ${styles.logout}`}></i>
                                         Alterar Status
                                     </a>

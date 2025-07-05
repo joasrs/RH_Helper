@@ -37,7 +37,6 @@ function Select({name, descricao, useApi, onChange, desabilitado = false, valor,
     }, [buscarItensCombo, setErroPadrao]);
 
     function onChangeValor(e) {
-        console.log(e.target.value);
         onChange && onChange(e);
     }
 
@@ -45,11 +44,11 @@ function Select({name, descricao, useApi, onChange, desabilitado = false, valor,
             required ? 
             <select required disabled={desabilitado} name={name} className={`form-select ${styles.desabilitado}`} onChange={onChangeValor} style={{height: 58}} value={valorSelecionado}>
                 <option value="" defaultValue hidden>Selecionar {descricao}</option>
-                {itensCombo && itensCombo.map(i=> <option key={i.id} value={{i}}>{i.descricao}</option>)}
+                {itensCombo && itensCombo.map(i=> <option key={i.id} value={i.id}>{i.descricao}</option>)}
             </select> :
             <select disabled={desabilitado} name={name} className={`form-select ${styles.desabilitado}`} onChange={onChangeValor} style={{height: 58}} value={valorSelecionado}>
                 <option value="" defaultValue hidden>Selecionar {descricao}</option>
-                {itensCombo && itensCombo.map(i=> <option key={i.id} value={{i}}>{i.descricao}</option>)}
+                {itensCombo && itensCombo.map(i=> <option key={i.id} value={i.id}>{i.descricao}</option>)}
             </select> 
     );
 }

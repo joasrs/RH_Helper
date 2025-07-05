@@ -83,10 +83,6 @@ module.exports = class StatusController {
     }
   }
 
-  // static async buscarStatussDoUsuario(usuarioId, idUsuarioAutenticado) {
-  //   return buscarStatussDoUsuario(usuarioId, idUsuarioAutenticado);
-  // }
-
   static async removerStatus(req, res) {
     let status;
     let message;
@@ -148,6 +144,23 @@ module.exports = class StatusController {
       });
     } catch (error) {
       console.log("erro ao consultar os status: " + error);
+      res.status(500).json({ message: error });
+    }
+  }
+
+  static async buscarUmStatus(req, res) {
+    try {
+      const status = await Status.findOne({
+        where: {
+          id: req.params.idStatus,
+        },
+      });
+
+      res.status(200).json({
+        status,
+      });
+    } catch (error) {
+      console.log("erro ao buscar o status: " + error);
       res.status(500).json({ message: error });
     }
   }
